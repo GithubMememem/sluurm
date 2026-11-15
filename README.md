@@ -1,10 +1,25 @@
 # Sluurm
 
-A purple, motion-softened movie and series discovery interface inspired by Cinejoy's feature set.
+Sluurm is a movie and series discovery app built as a separate project from [Cinejoy](https://github.com/Omarhussien072/Cinejoy). It reuses adapted Cinejoy card and Swiper carousel components, with a redesigned purple, Xiaomi HyperOS-inspired interface.
 
-## No API key required
+## Movie and series data
 
-Sluurm currently uses a small local catalogue bundled with the app. There is no TMDB API request, no API key, no `.env` file, and no secrets to configure. Movie poster and backdrop images are loaded from TMDB's public image CDN; the catalogue data itself is stored locally in `src/services/tmdb.js`.
+Cinejoy's original catalogue service uses the **TMDB API** for trending titles, discovery, top-rated lists, search, genres, watch providers, trailers, recommendations and title details. Its image assets use TMDB's image CDN.
+
+TMDB's API requires an API key. Because Sluurm must work with **no API key and no .env file**, it currently ships a small bundled catalogue of TMDB titles and metadata in `src/services/tmdb.js`, while poster/backdrop images continue to load from TMDB's public image CDN. The bundled catalogue is not a live TMDB feed and does not update automatically. The app does not make unauthenticated TMDB API requests or use a hidden key.
+
+## Features
+
+- Adapted Cinejoy interactive media cards and Swiper carousels
+- Purple glass-style interface with responsive navigation
+- Bundled movie and series catalogue using TMDB title metadata
+- TMDB image CDN for posters and backdrops
+- Trending, popular and top-rated shelves based on the bundled catalogue
+- Search across bundled titles
+- Title details and trailer links when available in the catalogue
+- Local watchlist saved in the browser
+- No advertisements or ad integrations
+- No API key, .env file, or deployment secrets required
 
 ## Run locally
 
@@ -13,16 +28,12 @@ npm install
 npm run dev
 ```
 
-## Features
+## Publish
 
-- Local movie and series catalogue
-- Trending, popular and top-rated shelves
-- Search across the bundled titles
-- Title detail view
-- Local watchlist saved in the browser
-- Responsive purple interface
-- No advertisements or ad integrations
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml`. It builds the Vite app and deploys the `dist` folder to GitHub Pages on every push to `main`. In the repository's **Settings → Pages**, the source must be set to **GitHub Actions** if it is not already.
 
-## Credits
+## Credits and license
 
-Sluurm is a separate project. The original Cinejoy repository informed the feature direction and UI structure: https://github.com/Omarhussien072/Cinejoy (MIT License). Sluurm's current interface is a separate implementation; the original project license is included in this repository for reference.
+Cinejoy source: https://github.com/Omarhussien072/Cinejoy
+
+Cinejoy is MIT-licensed. Adapted source components are identified in their file comments. The original MIT license notice is retained in this repository's `LICENSE` file.
