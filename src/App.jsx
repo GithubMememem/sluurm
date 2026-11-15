@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Search, House, Clapperboard, Tv, Bookmark, Settings2, ChevronRight, Play, Plus, Check, Star, X, SlidersHorizontal, Sparkles, Menu, ArrowUpRight, Info } from 'lucide-react';
 import { getFeed, getDetails, image, searchTitles } from './services/tmdb';
+import CarouselComponent from './components/CarouselComponent/CarouselComponent';
 
 const savedKey = 'sluurm-saved-v1';
 const readSaved = () => { try { return JSON.parse(localStorage.getItem(savedKey) || '[]'); } catch { return []; } };
@@ -26,7 +27,7 @@ function PosterCard({ item, kind, onOpen, saved, onSave }) {
 function Row({ title, items, kind, onOpen, saved, onSave, more }) {
   if (!items?.length) return null;
   return <section className="shelf"><div className="shelf-head"><div><span className="eyebrow">CURATED FOR YOU</span><h2>{title}</h2></div>{more && <button className="text-action" onClick={more}>See all <ChevronRight size={15}/></button>}</div>
-    <div className="poster-row">{items.slice(0, 12).map(item => <PosterCard key={item.id + (item.media_type || kind)} item={item} kind={kind} onOpen={onOpen} saved={saved.some(s => s.id === item.id && s.type === (item.media_type || kind))} onSave={onSave}/>)}</div>
+    <CarouselComponent cardsData={items.slice(0, 12)} type={kind} title={title} onOpen={onOpen} />
   </section>;
 }
 
