@@ -1,34 +1,28 @@
 # Sluurm
 
-A purple, motion-softened movie and series discovery app. Built with React + Vite, using the TMDB API for movie and TV metadata.
+A purple, motion-softened movie and series discovery interface inspired by Cinejoy's feature set.
+
+## No API key required
+
+Sluurm currently uses a small local catalogue bundled with the app. There is no TMDB API request, no API key, no `.env` file, and no secrets to configure. Movie poster and backdrop images are loaded from TMDB's public image CDN; the catalogue data itself is stored locally in `src/services/tmdb.js`.
 
 ## Run locally
 
-1. Install Node.js (18+).
-2. Copy `.env.example` to `.env`.
-3. Get a TMDB API key from https://www.themoviedb.org/settings/api and put it in `.env`:
-
-   ```env
-   VITE_TMDB_API_KEY=your_key_here
-   ```
-
-4. Install and start:
-
-   ```bash
-   npm install
-   npm run dev
-   ```
+```bash
+npm install
+npm run dev
+```
 
 ## Features
 
-- Trending, popular and top-rated movies and series
-- Search across movie and TV titles
-- Detail view with genres, overview, rating and trailer link
-- Local watchlist saved in the current browser
-- Responsive layout and no advertising integrations
+- Local movie and series catalogue
+- Trending, popular and top-rated shelves
+- Search across the bundled titles
+- Title detail view
+- Local watchlist saved in the browser
+- Responsive purple interface
+- No advertisements or ad integrations
 
-Movie and TV metadata and images are provided by TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.
+## Credits
 
-## Attribution
-
-Sluurm is a separate project. Its feature direction was informed by the public Cinejoy project (MIT License): https://github.com/Omarhussien072/Cinejoy. This implementation uses a fresh Sluurm interface and its own component structure. See the original project for its license terms.
+Sluurm is a separate project. The original Cinejoy repository informed the feature direction and UI structure: https://github.com/Omarhussien072/Cinejoy (MIT License). Sluurm's current interface is a separate implementation; the original project license is included in this repository for reference.
