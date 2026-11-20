@@ -145,7 +145,7 @@ export default function App() {
       {!apiKey && page !== 'settings' && <div className="connect-note"><b>Connect TMDB to get started</b><span>Live titles, search, ratings, trailers and details need your free TMDB credential.</span><button className="primary-button" onClick={() => nav('settings')}>Set up TMDB <ArrowUpRight size={15}/></button></div>}
       {loading && <div className="loading-line"><span/> Getting the good stuff...</div>}
       {error && <div className="error-note"><Info size={16}/><span>{error}</span></div>}
-      <footer className="footer"><span>SLUURM © 2026</span><span>Made for movie nights.</span><span>Movie data from TMDB</span></footer>
+      <footer className="footer"><span>SLUURM © 2026</span><span>Made for movie nights.</span><span>Uses the TMDB API · Not endorsed by TMDB</span></footer>
     </main>
     {active && <div className="modal-backdrop" onClick={() => {setActive(null);setDetails(null);}}><section className="detail-modal" onClick={e => e.stopPropagation()}>
       <button className="modal-close" onClick={() => {setActive(null);setDetails(null);}}><X size={19}/></button>
