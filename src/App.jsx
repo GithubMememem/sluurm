@@ -48,6 +48,9 @@ export default function App() {
   const [apiKey, setApiKeyState] = useState(getApiKey);
   const [keyDraft, setKeyDraft] = useState(getApiKey);
   const [feedPages, setFeedPages] = useState({ trending: 1, popular: 1, top: 1 });
+  const [searchPage, setSearchPage] = useState(1);
+  const [searchTotalPages, setSearchTotalPages] = useState(1);
+  const [searchLoadingMore, setSearchLoadingMore] = useState(false);
 
   useEffect(() => {
     if (!apiKey) { setLoading(false); setError(''); return; }
@@ -60,10 +63,17 @@ export default function App() {
   }, [apiKey]);
   useEffect(() => { localStorage.setItem(savedKey, JSON.stringify(saved)); }, [saved]);
   useEffect(() => {
-    if (page !== 'search' || query.trim().length < 2) { setResults([]); return; }
-    const timer = setTimeout(() => searchTitles(query.trim()).then(r => setResults((r.results || []).filter(x => x.media_type !== 'person'))).catch(e => setError(e.message)), 350);
+    if (page !== 'search' || query.trim().length < 2 || !apiKey) { setResults([]); return; }
+    const timer = setTimeout(() => {
+      searchTitles(query.trim(), 1).then(data => {
+        setResults(data.results || []);
+        setSearchPage(1);
+        setSearchTotalPages(data.total_pages || 1);
+        setError('');
+      }).catch(e => setError(e.message));
+    }, 350);
     return () => clearTimeout(timer);
-  }, [query, page]);
+  }, [query, page, apiKey]);
 
   const toggleSave = (item, type) => {
     setSaved(old => {
@@ -88,6 +98,17 @@ export default function App() {
       setter(old => ({ ...old, [category]: [...old[category], ...(data.results || [])] }));
       setFeedPages(old => ({ ...old, [category]: nextPage }));
     } catch (e) { setError(e.message); }
+  };
+  const loadMoreSearch = async () => {
+    if (searchLoadingMore || searchPage >= searchTotalPages) return;
+    setSearchLoadingMore(true);
+    try {
+      const nextPage = searchPage + 1;
+      const data = await searchTitles(query.trim(), nextPage);
+      setResults(old => [...old, ...(data.results || [])]);
+      setSearchPage(nextPage);
+    } catch (e) { setError(e.message); }
+    finally { setSearchLoadingMore(false); }
   };
   const currentFeed = page === 'series' ? seriesFeed : feed;
   const savedMovies = saved.filter(x => x.type !== 'tv');
@@ -120,7 +141,7 @@ export default function App() {
       {(page === 'movies' || page === 'series') && <div className="page-content standard-page"><div className="page-heading"><span className="eyebrow">THE COLLECTION</span><h1>{page === 'movies' ? 'Movies' : 'Series'}<span>.</span></h1><p>Stories worth giving your time to.</p></div><Row title="Trending" items={currentFeed.trending} kind={kind} onOpen={openItem} saved={saved} onSave={toggleSave} more={() => loadMore('trending')}/><Row title="Popular" items={currentFeed.popular} kind={kind} onOpen={openItem} saved={saved} onSave={toggleSave} more={() => loadMore('popular')}/><Row title="Top rated" items={currentFeed.top} kind={kind} onOpen={openItem} saved={saved} onSave={toggleSave} more={() => loadMore('top')}/></div>}
       {page === 'saved' && <div className="page-content standard-page"><div className="page-heading"><span className="eyebrow">KEPT CLOSE</span><h1>My list<span>.</span></h1><p>Your personal shelf. Saved on this device.</p></div>{saved.length ? <div className="poster-grid">{saved.map(item => <PosterCard key={item.id + item.type} item={item} kind={item.type} onOpen={openItem} saved={true} onSave={toggleSave}/>)}</div> : <div className="empty-state"><Bookmark size={28}/><h3>Your list is waiting.</h3><p>Save movies and series to keep them all in one place.</p><button className="primary-button" onClick={() => nav('home')}>Explore titles <ArrowUpRight size={16}/></button></div>}</div>}
       {page === 'settings' && <div className="page-content standard-page"><div className="page-heading"><span className="eyebrow">APP CONNECTION</span><h1>Settings<span>.</span></h1><p>Connect your own TMDB key to power live movie and series data.</p></div><section className="settings-panel"><div className="settings-copy"><h2>TMDB API credential</h2><p>Use a TMDB API Read Access Token (the long JWT-style token) or a v3 API key. It stays in this browser's local storage and is sent directly to TMDB. It is not uploaded to Sluurm.</p><a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noreferrer">Get a free TMDB API key <ArrowUpRight size={14}/></a></div><label className="key-label">API key / Read Access Token<input type="password" autoComplete="off" placeholder="Paste your TMDB credential" value={keyDraft} onChange={e => setKeyDraft(e.target.value)}/></label><div className="settings-actions"><button className="primary-button" onClick={saveCredential}>Save and connect</button><button className="soft-button" onClick={() => { setKeyDraft(''); setApiKey(''); setApiKeyState(''); setFeed({trending:[],popular:[],top:[]}); setSeriesFeed({trending:[],popular:[],top:[]}); }}>Remove key</button></div><p className="settings-status">{apiKey ? 'A TMDB credential is saved on this device.' : 'No TMDB credential connected yet.'}</p></section></div>}
-      {page === 'search' && <div className="page-content standard-page"><div className="page-heading"><span className="eyebrow">FIND YOUR NEXT WATCH</span><h1>Search<span>.</span></h1><p>Search across movies and series.</p></div><div className="search-box"><Search size={20}/><input autoFocus placeholder="Try a title, actor, or series..." value={query} onChange={e => setQuery(e.target.value)}/>{query && <button onClick={() => setQuery('')}><X size={17}/></button>}</div>{results.length > 0 ? <div className="poster-grid">{results.map(item => <PosterCard key={item.id + item.media_type} item={item} kind={item.media_type} onOpen={openItem} saved={saved.some(s => s.id === item.id && s.type === item.media_type)} onSave={toggleSave}/>)}</div> : <div className="search-hint"><SlidersHorizontal size={19}/><span>{query.length < 2 ? 'Start typing to discover something.' : 'No matching titles found.'}</span></div>}</div>}
+      {page === 'search' && <div className="page-content standard-page"><div className="page-heading"><span className="eyebrow">FIND YOUR NEXT WATCH</span><h1>Search<span>.</span></h1><p>Search across movies and series.</p></div><div className="search-box"><Search size={20}/><input autoFocus placeholder="Try a title, actor, or series..." value={query} onChange={e => setQuery(e.target.value)}/>{query && <button onClick={() => setQuery('')}><X size={17}/></button>}</div>{results.length > 0 ? <><div className="poster-grid">{results.map(item => <PosterCard key={item.id + item.media_type} item={item} kind={item.media_type} onOpen={openItem} saved={saved.some(s => s.id === item.id && s.type === item.media_type)} onSave={toggleSave}/>)}</div>{searchPage < searchTotalPages && <div className="load-more-wrap"><button className="soft-button" onClick={loadMoreSearch} disabled={searchLoadingMore}>{searchLoadingMore ? 'Loading…' : 'Load more results'}</button></div>}</> : <div className="search-hint"><SlidersHorizontal size={19}/><span>{query.length < 2 ? 'Start typing to discover something.' : 'No matching titles found.'}</span></div>}</div>}
       {!apiKey && page !== 'settings' && <div className="connect-note"><b>Connect TMDB to get started</b><span>Live titles, search, ratings, trailers and details need your free TMDB credential.</span><button className="primary-button" onClick={() => nav('settings')}>Set up TMDB <ArrowUpRight size={15}/></button></div>}
       {loading && <div className="loading-line"><span/> Getting the good stuff...</div>}
       {error && <div className="error-note"><Info size={16}/><span>{error}</span></div>}
