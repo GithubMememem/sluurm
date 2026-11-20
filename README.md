@@ -1,25 +1,35 @@
 # Sluurm
 
-Sluurm is a movie and series discovery app built as a separate project from [Cinejoy](https://github.com/Omarhussien072/Cinejoy). It reuses adapted Cinejoy card and Swiper carousel components, with a redesigned purple, Xiaomi HyperOS-inspired interface.
+Sluurm is a movie and series discovery app, built separately from [Cinejoy](https://github.com/Omarhussien072/Cinejoy). It adapts Cinejoy's original interactive Card and Swiper Carousel components and its cinematic, full-bleed home-page approach, with a restrained Xiaomi HyperOS-inspired purple accent.
 
-## Movie and series data
+## Live movie and series data
 
-Cinejoy's original catalogue service uses the **TMDB API** for trending titles, discovery, top-rated lists, search, genres, watch providers, trailers, recommendations and title details. Its image assets use TMDB's image CDN.
+Sluurm uses the TMDB API for trending titles, popular and top-rated lists, search, genres, title details, cast, recommendations and trailers. It is no longer a bundled demo catalogue.
 
-TMDB's API requires an API key. Because Sluurm must work with **no API key and no .env file**, it currently ships a small bundled catalogue of TMDB titles and metadata in `src/services/tmdb.js`, while poster/backdrop images continue to load from TMDB's public image CDN. The bundled catalogue is not a live TMDB feed and does not update automatically. The app does not make unauthenticated TMDB API requests or use a hidden key.
+### Connect your TMDB credential
+
+1. Create a free account at [TMDB](https://www.themoviedb.org/).
+2. Open [API settings](https://www.themoviedb.org/settings/api) and request an API credential.
+3. Open Sluurm → **Settings**.
+4. Paste either your **API Read Access Token** (the long JWT-style token) or your **v3 API key**, then choose **Save and connect**.
+
+The credential is stored in this browser's local storage and sent directly from the browser to TMDB. It is not included in this repository, committed to GitHub, or uploaded to a Sluurm server. Anyone with access to this browser profile can access its local storage, so use your own credential and remove it from Settings on shared devices.
 
 ## Features
 
-- Adapted Cinejoy interactive media cards and Swiper carousels
-- Purple glass-style interface with responsive navigation
-- Bundled movie and series catalogue using TMDB title metadata
-- TMDB image CDN for posters and backdrops
-- Trending, popular and top-rated shelves based on the bundled catalogue
-- Search across bundled titles
-- Title details and trailer links when available in the catalogue
+- Live TMDB trending, popular and top-rated movie and TV shelves
+- Paginated browse lists and search results, not a hardcoded 15-title catalogue
+- Search across movies and TV series
+- Working title detail requests with synopsis, genres, cast, recommendations and YouTube trailers when TMDB provides them
+- Cinejoy-derived hover cards and Swiper carousel navigation
+- Cinematic hero layout and floating glass navigation
 - Local watchlist saved in the browser
-- No advertisements or ad integrations
-- No API key, .env file, or deployment secrets required
+- Responsive mobile and desktop layouts
+- No ads or ad integrations
+
+Sluurm is a discovery app. TMDB provides metadata and trailer references; it does not provide full-movie streaming rights or playback.
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 ## Run locally
 
@@ -30,7 +40,7 @@ npm run dev
 
 ## Publish
 
-The repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml`. It builds the Vite app and deploys the `dist` folder to GitHub Pages on every push to `main`. In the repository's **Settings → Pages**, the source must be set to **GitHub Actions** if it is not already.
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml`. It builds the Vite app and deploys the `dist` folder to GitHub Pages on every push to `main`. In the repository's **Settings → Pages**, set the source to **GitHub Actions** if it is not already.
 
 ## Credits and license
 
