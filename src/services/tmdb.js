@@ -1,73 +1,34 @@
-const API_ROOT = 'https://api.themoviedb.org/3';
-const KEY_STORAGE = 'sluurm-tmdb-credential-v1';
-
-export const getApiKey = () => {
-  try { return localStorage.getItem(KEY_STORAGE) || ''; } catch { return ''; }
-};
-export const setApiKey = (value) => {
-  try {
-    if (value) localStorage.setItem(KEY_STORAGE, value);
-    else localStorage.removeItem(KEY_STORAGE);
-  } catch {}
-};
-
-export const image = (path, size = 'w500') =>
-  path ? `https://image.tmdb.org/t/p/${size}${path.startsWith('/') ? '' : '/'}${path}` : '';
-
-async function tmdb(path, params = {}) {
-  const credential = getApiKey().trim();
-  if (!credential) throw new Error('Add your TMDB API key in Settings to load movies and series.');
-  const url = new URL(API_ROOT + path);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') url.searchParams.set(key, value);
-  });
-  const headers = { accept: 'application/json' };
-  if (credential.startsWith('eyJ')) headers.Authorization = `Bearer ${credential}`;
-  else url.searchParams.set('api_key', credential);
-  const response = await fetch(url, { headers });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    const message = response.status === 401
-      ? 'TMDB rejected that key. Check it in Settings and try again.'
-      : response.status === 404 ? 'That title could not be found.'
-      : data.status_message || `TMDB request failed (${response.status}).`;
-    throw new Error(message);
-  }
-  return data;
+const BASE='https://v3-cinemeta.strem.io';
+async function request(path){
+ const res=await fetch(BASE+path,{headers:{accept:'application/json'}});
+ if(!res.ok) throw new Error('The catalogue is temporarily unavailable. Try again in a moment.');
+ return res.json();
 }
-
-export async function getFeed(kind = 'movie') {
-  const base = kind === 'tv' ? '/tv' : '/movie';
-  const [trending, popular, top] = await Promise.all([
-    tmdb(`/trending/${kind}/week`, { page: 1 }),
-    tmdb(`${base}/popular`, { page: 1 }),
-    tmdb(`${base}/top_rated`, { page: 1 })
-  ]);
-  return {
-    trending: (trending.results || []).map(x => ({ ...x, media_type: kind })),
-    popular: (popular.results || []).map(x => ({ ...x, media_type: kind })),
-    top: (top.results || []).map(x => ({ ...x, media_type: kind }))
-  };
+function normalise(m,type){
+ const kind=m.type||type||'movie', date=m.releaseInfo||m.year||'';
+ return {...m,id:m.id,media_type:kind==='series'?'tv':'movie',
+ title:kind==='series'?undefined:m.name,name:kind==='series'?m.name:undefined,
+ poster:m.poster||'',background:m.background||'',overview:m.description||'',
+ release_date:kind==='movie'?date:'',first_air_date:kind==='series'?date:'',
+ genres:Array.isArray(m.genres)?m.genres:[],cast:Array.isArray(m.cast)?m.cast:[],
+ imdb_url:m.id?'https://www.imdb.com/title/'+m.id+'/':'',
+ imdbRating:m.imdbRating||''};
 }
-
-export async function getCollection(kind = 'movie', category = 'popular', page = 1) {
-  const base = kind === 'tv' ? '/tv' : '/movie';
-  const path = category === 'trending' ? `/trending/${kind}/week`
-    : `${base}/${category === 'top' ? 'top_rated' : category}`;
-  const data = await tmdb(path, { page });
-  return { ...data, results: (data.results || []).map(x => ({ ...x, media_type: kind })) };
+export async function getCatalog(kind='movie',page=1,query=''){
+ const type=kind==='tv'||kind==='series'?'series':'movie';
+ const search=query.trim()?'/search='+encodeURIComponent(query.trim()):'';
+ const skip=Math.max(0,(page-1)*50);
+ const data=await request('/catalog/'+type+'/top'+search+'.json?skip='+skip);
+ const metas=Array.isArray(data.metas)?data.metas:[];
+ return {results:metas.map(m=>normalise(m,type)),hasMore:metas.length>=50};
 }
-
-export async function getDetails(kind, id) {
-  return tmdb(`/${kind}/${id}`, { append_to_response: 'videos,credits,recommendations,similar' });
+export async function getDetails(kind,id){
+ const type=kind==='tv'||kind==='series'?'series':'movie';
+ const data=await request('/meta/'+type+'/'+encodeURIComponent(id)+'.json');
+ if(!data.meta)throw new Error('No details were returned for this title.');
+ return normalise(data.meta,type);
 }
-
-export async function searchTitles(query, page = 1) {
-  const data = await tmdb('/search/multi', { query, page, include_adult: false });
-  return { ...data, results: (data.results || []).filter(x => x.media_type === 'movie' || x.media_type === 'tv') };
-}
-
-export async function getGenres(kind = 'movie') {
-  const data = await tmdb(`/genre/${kind}/list`);
-  return data.genres || [];
+export async function searchTitles(q,page=1){
+ const [m,s]=await Promise.all([getCatalog('movie',page,q),getCatalog('tv',page,q)]);
+ return {results:[...m.results,...s.results],hasMore:m.hasMore||s.hasMore};
 }
