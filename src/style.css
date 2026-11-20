@@ -48,3 +48,11 @@ body{background:#08080b}.app-shell{background:#08080b}.sidebar,.nav-scrim{displa
 .error-note{margin:20px 6vw}.loading-line{background:#15131a;border:1px solid #ffffff18}
 @media(max-width:900px){.topbar{height:75px;padding:0 22px}.top-nav-link{padding:0 10px}.top-nav-link span{display:none}.top-nav-link{width:40px;justify-content:center}.hero{height:74vh;min-height:540px}.hero-copy{padding:0 5vw;bottom:9%}.welcome-line,.shelf{margin-left:5vw;margin-right:5vw}.standard-page{padding:110px 5vw 25px}}
 @media(max-width:600px){.topbar{height:68px;padding:0 15px;gap:12px}.top-brand{font-size:20px}.brand-mark{width:29px;height:29px}.top-nav{gap:0;padding:4px}.top-nav-link{height:36px;width:35px;padding:0}.top-actions{display:none}.hero{height:76vh;min-height:560px;background-position:60% center}.hero-copy{bottom:8%;padding:0 22px;max-width:100%}.hero h1{font-size:42px;letter-spacing:-1.8px}.hero-copy p{font-size:12px}.hero-caption{right:22px;bottom:4%}.welcome-line{margin:36px 22px 27px}.welcome-line h2{font-size:23px}.shelf{margin:0 22px 37px}.shelf-head h2{font-size:17px}.cinejoy-carousel .swiper-slide{width:138px}.standard-page{padding:95px 20px 20px}.page-heading h1{font-size:40px}.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px}.settings-panel{padding:20px}.settings-actions{flex-wrap:wrap}.footer{margin:42px 20px 0}.error-note{margin:10px 20px}}
+
+
+.cinejoy-card-overlay-content{display:flex;align-items:center;flex-direction:column;gap:10px;padding:12px}
+.cinejoy-card-overlay-content strong{font-size:13px;line-height:1.35;text-align:center;color:#fff}
+.cinejoy-card-year{font-size:10px;color:#e0d9e8}
+.load-more-wrap{display:flex;justify-content:center;padding:22px 0 44px}
+.load-more-wrap .soft-button{min-width:175px;background:#17151c;border:1px solid #ffffff20}
+.load-more-wrap .soft-button:disabled{opacity:.6;cursor:wait}
