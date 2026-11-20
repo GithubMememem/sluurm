@@ -2,3 +2,49 @@
 
 /* Cinejoy's Swiper carousel/card interaction, recoloured for Sluurm. */
 .cinejoy-carousel{position:relative;width:100%;overflow:visible}.cinejoy-carousel .swiper{overflow:visible;padding:2px 2px 16px}.cinejoy-carousel .swiper-slide{width:166px;height:auto}.cinejoy-card{display:block;width:100%;padding:0 0 5px;background:none;border:0;text-align:left;color:inherit}.cinejoy-card-media{position:relative;width:100%;aspect-ratio:2/3;overflow:hidden;border:1px solid #ffffff12;border-radius:16px;background:linear-gradient(145deg,#35264b,#1b1428);box-shadow:0 8px 22px #0003}.cinejoy-card-media>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s}.cinejoy-card:hover .cinejoy-card-media>img{transform:scale(1.06)}.cinejoy-card-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(0deg,#130d20e8,#130d2033);backdrop-filter:blur(2px)}.cinejoy-card-play{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#d4b7ff;color:#241635;box-shadow:0 8px 25px #0006}.cinejoy-card-overlay strong{max-width:90%;font-size:12px;text-align:center;line-height:1.35}.cinejoy-card-info{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 2px 0}.cinejoy-card-info strong{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cinejoy-card-info span{font-size:9px;color:#aa9bbd;white-space:nowrap}.cinejoy-card-info .cinejoy-rating{display:inline-flex;align-items:center;gap:4px;color:#edc16d}.cinejoy-carousel .swiper-button-next,.cinejoy-carousel .swiper-button-prev{width:35px;height:35px;border-radius:12px;background:#211832ed;border:1px solid #ffffff18;color:#e8d9ff;box-shadow:0 8px 25px #0005}.cinejoy-carousel .swiper-button-next:after,.cinejoy-carousel .swiper-button-prev:after{font-size:12px;font-weight:900}.cinejoy-carousel .swiper-button-disabled{opacity:0!important}@media(max-width:760px){.cinejoy-carousel .swiper-slide{width:132px}.cinejoy-carousel .swiper-button-next,.cinejoy-carousel .swiper-button-prev{display:none}}
+
+
+/* Cinejoy layout foundation, tuned with Sluurm's restrained HyperOS purple accent. */
+:root{font-family:Inter,'DM Sans',Arial,sans-serif;color:#f4f1f8;background:#08080b;--bg:#08080b;--panel:#111116;--panel2:#191820;--muted:#a19ba9;--purple:#a98be8;--pink:#c3a8f2;--line:rgba(255,255,255,.09)}
+body{background:#08080b}.app-shell{background:#08080b}.sidebar,.nav-scrim{display:none!important}.main-area{margin-left:0;padding-top:0}
+.topbar{position:fixed;top:0;left:0;right:0;height:86px;padding:0 4.2vw;background:linear-gradient(180deg,rgba(5,5,8,.76),transparent);border:0;backdrop-filter:none;z-index:40;justify-content:space-between;gap:28px}
+.top-brand{margin:0;flex:0 0 auto;font-size:23px;letter-spacing:-1.3px}.brand-mark{border-radius:11px;width:31px;height:31px;font-size:22px;background:#b99be9;box-shadow:none}
+.top-nav{display:flex;align-items:center;gap:3px;padding:6px;border-radius:999px;background:rgba(19,18,23,.62);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(24px);box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 30px #0005}
+.top-nav-link{height:39px;padding:0 15px;border:0;border-radius:999px;background:transparent;color:#c3bdca;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;white-space:nowrap;transition:background .2s,color .2s}
+.top-nav-link:hover{color:#fff;background:#ffffff0d}.top-nav-link.active{background:#eee8f7;color:#17131d}.top-nav-link.active svg{color:#7657a8}
+.top-actions{flex:0 0 auto}.top-actions .avatar{background:#28232f;color:#e5d9f7;border:1px solid #ffffff18}
+.page-content{max-width:none;padding:0}
+.hero{height:min(82vh,820px);min-height:590px;border:0;border-radius:0;background-color:#111;box-shadow:none;background-position:center 27%}
+.hero-copy{position:absolute;left:0;bottom:9%;padding:0 6vw;max-width:700px}
+.hero h1{font-size:clamp(42px,5.2vw,72px);letter-spacing:-2.8px;line-height:.98;margin:18px 0 16px}
+.hero-copy p{font-size:14px;line-height:1.65;color:#e0dce5;max-width:540px}
+.hero-kicker{font-size:10px;letter-spacing:1.5px}
+.hero-buttons .primary-button{background:#eee8f7;color:#17131d;box-shadow:none;border-radius:999px;height:46px;padding:0 22px}
+.hero-buttons .soft-button{border-radius:999px;height:46px;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18)}
+.hero-caption{right:6vw;bottom:10%;font-size:9px}
+.welcome-line{margin:48px 6vw 34px;align-items:end}.welcome-line h2{font-size:28px;letter-spacing:-1px}.welcome-line h2 em{color:#bba0ed}.welcome-note{color:#aaa3b2}
+.shelf{margin:0 6vw 48px}.shelf-head{margin-bottom:18px}.shelf-head .eyebrow{display:none}.shelf-head h2{font-size:20px;letter-spacing:-.5px}
+.cinejoy-carousel .swiper-slide{width:clamp(145px,14vw,205px)}.cinejoy-card{padding:0}
+.cinejoy-card-media{border-radius:11px;border:0;background:#18171c;box-shadow:none}
+.cinejoy-card-info{padding:9px 1px 0}.cinejoy-card-info strong{font-size:12px;font-weight:600;color:#eee}.cinejoy-card-info span{font-size:10px}
+.cinejoy-card-overlay{background:rgba(0,0,0,.58);backdrop-filter:blur(3px)}.cinejoy-card-play{background:#f1edf7;color:#17131d;box-shadow:none}
+.cinejoy-carousel .swiper-button-next,.cinejoy-carousel .swiper-button-prev{background:rgba(18,17,22,.84);border:1px solid #ffffff20;backdrop-filter:blur(12px);box-shadow:none}
+.standard-page{padding:125px 6vw 30px;min-height:calc(100vh - 130px)}.page-heading{margin-bottom:35px}
+.page-heading h1{font-size:52px;letter-spacing:-2px}.page-heading h1 span{color:#b99be9}
+.poster-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:28px 18px}
+.poster-frame{border-radius:11px;background:#19181d;border:0}.poster-card:hover .poster-frame{box-shadow:0 12px 28px #0008}
+.search-box{background:#121116;border:1px solid #ffffff1c;border-radius:12px;box-shadow:none}.search-box:focus-within{border-color:#a98be8}.search-box input{font-size:14px}
+.primary-button{background:#eee8f7;color:#17131d;box-shadow:none;border-radius:999px}.soft-button{border-radius:999px}
+.detail-modal{background:#111015;border-radius:16px;border:1px solid #ffffff1c}.detail-body h2{font-size:34px}.modal-close{border-radius:50%;background:#17151d}
+.footer{margin:60px 6vw 0}
+.settings-panel{max-width:720px;padding:28px;background:#111116;border:1px solid #ffffff16;border-radius:14px}
+.settings-copy h2{font-size:19px;margin:0 0 10px}.settings-copy p{font-size:13px;line-height:1.7;color:#aaa3b2;max-width:620px}
+.settings-copy a{display:inline-flex;align-items:center;gap:6px;color:#c3a8f2;font-size:12px;text-decoration:none;margin:7px 0 24px}
+.key-label{display:grid;gap:9px;color:#d8d1e1;font-size:12px;font-weight:600}
+.key-label input{height:46px;padding:0 14px;border-radius:9px;border:1px solid #ffffff20;background:#09090c;color:white;outline:0}.key-label input:focus{border-color:#b99be9}
+.settings-actions{display:flex;gap:10px;margin-top:17px}.settings-status{font-size:11px;color:#938b9c;margin:18px 0 0}
+.connect-note{margin:34px auto 80px;max-width:620px;padding:34px;text-align:center;display:flex;align-items:center;flex-direction:column;gap:12px;border:1px solid #ffffff18;background:#111116;border-radius:15px}
+.connect-note b{font-size:20px;font-weight:600}.connect-note span{color:#aaa3b2;font-size:13px;line-height:1.6}
+.error-note{margin:20px 6vw}.loading-line{background:#15131a;border:1px solid #ffffff18}
+@media(max-width:900px){.topbar{height:75px;padding:0 22px}.top-nav-link{padding:0 10px}.top-nav-link span{display:none}.top-nav-link{width:40px;justify-content:center}.hero{height:74vh;min-height:540px}.hero-copy{padding:0 5vw;bottom:9%}.welcome-line,.shelf{margin-left:5vw;margin-right:5vw}.standard-page{padding:110px 5vw 25px}}
+@media(max-width:600px){.topbar{height:68px;padding:0 15px;gap:12px}.top-brand{font-size:20px}.brand-mark{width:29px;height:29px}.top-nav{gap:0;padding:4px}.top-nav-link{height:36px;width:35px;padding:0}.top-actions{display:none}.hero{height:76vh;min-height:560px;background-position:60% center}.hero-copy{bottom:8%;padding:0 22px;max-width:100%}.hero h1{font-size:42px;letter-spacing:-1.8px}.hero-copy p{font-size:12px}.hero-caption{right:22px;bottom:4%}.welcome-line{margin:36px 22px 27px}.welcome-line h2{font-size:23px}.shelf{margin:0 22px 37px}.shelf-head h2{font-size:17px}.cinejoy-carousel .swiper-slide{width:138px}.standard-page{padding:95px 20px 20px}.page-heading h1{font-size:40px}.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px}.settings-panel{padding:20px}.settings-actions{flex-wrap:wrap}.footer{margin:42px 20px 0}.error-note{margin:10px 20px}}
