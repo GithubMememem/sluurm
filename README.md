@@ -1,35 +1,20 @@
 # Sluurm
 
-Sluurm is a movie and series discovery app, built separately from [Cinejoy](https://github.com/Omarhussien072/Cinejoy). It adapts Cinejoy's original interactive Card and Swiper Carousel components and its cinematic, full-bleed home-page approach, with a restrained Xiaomi HyperOS-inspired purple accent.
+A cinematic movie and series discovery app with a dark violet palette, floating navigation, poster shelves, animated hover cards and a local watchlist.
 
-## Live movie and series data
+## No API key or sign-up
 
-Sluurm uses the TMDB API for trending titles, popular and top-rated lists, search, genres, title details, cast, recommendations and trailers. It is no longer a bundled demo catalogue.
+Sluurm uses the public Cinemeta metadata catalogue used by Stremio. It does not ask you to create a TMDB developer application, enter contact details, or paste an API key.
 
-### Connect your TMDB credential
+- Movie and series catalogues
+- Search across both catalogues
+- Title details, synopsis, cast and genres when available
+- IMDb links for title reference
+- Local My List saved in the browser
+- Cinejoy-derived animated Card and Swiper carousel components
+- No ads
 
-1. Create a free account at [TMDB](https://www.themoviedb.org/).
-2. Open [API settings](https://www.themoviedb.org/settings/api) and request an API credential.
-3. Open Sluurm → **Settings**.
-4. Paste either your **API Read Access Token** (the long JWT-style token) or your **v3 API key**, then choose **Save and connect**.
-
-The credential is stored in this browser's local storage and sent directly from the browser to TMDB. It is not included in this repository, committed to GitHub, or uploaded to a Sluurm server. Anyone with access to this browser profile can access its local storage, so use your own credential and remove it from Settings on shared devices.
-
-## Features
-
-- Live TMDB trending, popular and top-rated movie and TV shelves
-- Paginated browse lists and search results, not a hardcoded 15-title catalogue
-- Search across movies and TV series
-- Working title detail requests with synopsis, genres, cast, recommendations and YouTube trailers when TMDB provides them
-- Cinejoy-derived hover cards and Swiper carousel navigation
-- Cinematic hero layout and floating glass navigation
-- Local watchlist saved in the browser
-- Responsive mobile and desktop layouts
-- No ads or ad integrations
-
-Sluurm is a discovery app. TMDB provides metadata and trailer references; it does not provide full-movie streaming rights or playback.
-
-This product uses the TMDB API but is not endorsed or certified by TMDB.
+Cinemeta is a community metadata service, not a guaranteed commercial API. Availability and catalogue coverage depend on its upstream service. It provides metadata and artwork, not full-movie streaming or playback. See the [official Stremio documentation](https://github.com/Stremio/stremio-addons/blob/master/docs/tutorial/using-cinemeta.md).
 
 ## Run locally
 
@@ -38,12 +23,10 @@ npm install
 npm run dev
 ```
 
-## Publish
+## Deployment
 
-The repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml`. It builds the Vite app and deploys the `dist` folder to GitHub Pages on every push to `main`. In the repository's **Settings → Pages**, set the source to **GitHub Actions** if it is not already.
+GitHub Actions builds the Vite app and publishes it to GitHub Pages on pushes to `main`. If GitHub Pages has not been enabled yet, choose **Settings → Pages → GitHub Actions**.
 
-## Credits and license
+## Design source
 
-Cinejoy source: https://github.com/Omarhussien072/Cinejoy
-
-Cinejoy is MIT-licensed. Adapted source components are identified in their file comments. The original MIT license notice is retained in this repository's `LICENSE` file.
+The animated poster card and Swiper carousel are adapted from [Cinejoy](https://github.com/Omarhussien072/Cinejoy). Sluurm is a separate project with its own branding, layout and styling. The original MIT license notice is retained in `LICENSE`.
