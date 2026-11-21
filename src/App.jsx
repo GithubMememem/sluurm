@@ -2,6 +2,7 @@ import {useEffect,useState} from 'react';
 import {Search,House,Clapperboard,Tv,Bookmark,ChevronRight,Play,Plus,Check,Star,X,ArrowUpRight,Info,Menu} from 'lucide-react';
 import {getCatalog,getDetails,searchTitles} from './services/tmdb';
 import CarouselComponent from './components/CarouselComponent/CarouselComponent';
+import CinejoyNavbar from './components/Navbar/CinejoyNavbar';
 const KEY='sluurm-watchlist-v3';
 const readSaved=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return[]}};
 const title=x=>x?.title||x?.name||'Untitled';
@@ -26,8 +27,7 @@ export default function App(){
  const isSaved=x=>saved.some(v=>v.id===x.id&&v.media_type===x.media_type);
  const close=()=>{setActive(null);setDetails(null)},detail=details||active;
  return <div className="app-shell">
-  <header className="topbar"><button className="brand top-brand" onClick={()=>nav('home')}><span className="brand-mark">s<span>.</span></span><span>sluurm</span></button><nav className="top-nav">{navs.map(([id,label,Icon])=><button key={id} className={'top-nav-link '+(page===id?'active':'')} onClick={()=>nav(id)}><Icon size={16}/><span>{label}</span></button>)}</nav><button className="top-search" onClick={()=>nav('search')} aria-label="Search"><Search size={18}/></button><button className="mobile-menu" onClick={()=>setMobile(v=>!v)} aria-label="Menu"><Menu size={20}/></button></header>
-  {mobile&&<nav className="mobile-nav">{navs.map(([id,label,Icon])=><button key={id} onClick={()=>nav(id)}><Icon size={17}/>{label}</button>)}</nav>}
+  <CinejoyNavbar page={page} onNavigate={nav} /> onClick={()=>nav(id)}><Icon size={17}/>{label}</button>)}</nav>}
   {page==='home'&&<main className="home-page">
    {hero&&<section className="hero" style={{backgroundImage:'linear-gradient(90deg,rgba(15,10,24,.97),rgba(15,10,24,.68) 43%,rgba(15,10,24,.05)),linear-gradient(0deg,#0d0914,transparent 45%),url("'+bg+'")'}}><div className="hero-copy"><span className="hero-kicker"><i/> SLUURM SELECTS</span><h1>{title(hero)}</h1><div className="hero-stats"><span>{year(hero)}</span><span>{hero.genres?.slice(0,2).join(' · ')}</span>{hero.imdbRating&&<span>IMDb {hero.imdbRating}</span>}</div><p>{hero.overview||'Find something worth watching tonight.'}</p><div className="hero-buttons"><button className="primary-button" onClick={()=>open(hero,'movie')}><Play size={16} fill="currentColor"/> Explore film</button><button className="soft-button" onClick={()=>toggle(hero)}>{isSaved(hero)?<Check size={16}/>:<Plus size={16}/>} My List</button></div></div><div className="hero-mark">01 <i/> FEATURED</div></section>}
    <div className="home-intro"><div><span className="eyebrow">A LITTLE LESS SCROLLING, A LOT MORE CINEMA</span><h2>Stay for the <em>story.</em></h2></div><span>No account. No key. No ads.</span></div>
