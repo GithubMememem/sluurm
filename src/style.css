@@ -176,3 +176,52 @@ html, body {
 .cinejoy-mobile-nav{display:none}
 @media(max-width:700px){.cinejoy-header{height:72px;padding:0 18px}.cinejoy-brand-word{display:none}.cinejoy-nav{display:none}.cinejoy-mobile-search{display:grid}.cinejoy-mobile-nav{position:fixed;display:flex;z-index:46;left:12px;right:12px;bottom:12px;justify-content:space-around;gap:2px;padding:8px 5px;border:1px solid #ffffff14;border-radius:22px;background:#100b18e8;backdrop-filter:blur(22px);box-shadow:0 10px 35px #0008}.cinejoy-mobile-nav button{min-width:0;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px 2px;border:0;border-radius:14px;background:none;color:#a99db4;font-size:9px}.cinejoy-mobile-nav button.active{background:#ffffff16;color:#fff}}
 @media(min-width:701px){.home-page,.collection-page{padding-top:88px}}
+
+
+/* Recovered Atlantic-inspired theme layer */
+:root{
+  --bg:#071117;
+  --panel:#0d1d25;
+  --muted:#91a6ad;
+  --accent:#1eb6c8;
+  --accent-soft:#a3edf2;
+  --line:rgba(190,235,240,.12);
+  --theme-c:#1eb6c8;
+  --theme-ink:#071117;
+  --theme-surface:rgba(11,29,37,.78);
+  --theme-glass:rgba(7,17,23,.72);
+}
+body,.app-shell{background:#071117;color:#eaf5f6}
+.app-shell{background:radial-gradient(ellipse at 82% -20%,rgba(30,182,200,.17),transparent 44%),#071117}
+.topbar{background:rgba(7,17,23,.78);border-bottom-color:rgba(190,235,240,.10);backdrop-filter:blur(24px) saturate(155%)}
+.top-nav,.cinejoy-nav{background:rgba(12,31,39,.66);border-color:rgba(190,235,240,.13);backdrop-filter:blur(22px) saturate(160%)}
+.brand-mark,.cinejoy-brand-mark{background:#1eb6c8;color:#071117;box-shadow:0 5px 24px rgba(30,182,200,.22)}
+.brand-mark span,.cinejoy-brand-mark span{color:#eafcff}
+.top-nav-link.active,.cinejoy-nav-pill{background:#1eb6c8;color:#06151a}
+.top-nav-link.active{color:#06151a}
+.cinejoy-nav-item.active{color:#06151a}
+.hero{background-color:#10242d}
+.hero-kicker,.eyebrow,.home-intro em,.text-action,.hero-kicker i{color:#74dce6}
+.hero-kicker i{background:#1eb6c8;box-shadow:0 0 13px rgba(30,182,200,.65)}
+.primary-button{background:#1eb6c8;color:#06151a;box-shadow:0 7px 24px rgba(30,182,200,.15)}
+.soft-button{background:rgba(190,235,240,.10);border-color:rgba(190,235,240,.17);color:#eaf5f6;backdrop-filter:blur(14px) saturate(145%)}
+.primary-button:hover,.soft-button:hover{filter:brightness(1.1)}
+.cinejoy-card-media,.poster-frame{background:#10242d;border-color:rgba(190,235,240,.12)}
+.cinejoy-card-play,.play-circle{background:#1eb6c8;color:#06151a}
+.rating svg{color:#7fe1e8}
+.save-mini.is-saved{background:#1eb6c8;color:#06151a}
+.search-box{background:#0d1d25;border-color:rgba(190,235,240,.16);color:#74dce6}
+.search-box input::placeholder{color:#789099}
+.genre-tags span{border-color:rgba(190,235,240,.17);color:#c7dadd}
+.detail-modal{background:#0b1a22;border-color:rgba(190,235,240,.15);box-shadow:0 30px 100px rgba(0,0,0,.62)}
+.detail-backdrop{background-color:#10242d}
+.mobile-nav,.cinejoy-mobile-nav{background:rgba(7,17,23,.90);border-color:rgba(190,235,240,.14);backdrop-filter:blur(22px) saturate(160%)}
+.mobile-nav button:hover,.cinejoy-mobile-nav button.active{background:rgba(30,182,200,.14);color:#a3edf2}
+.footer{border-top-color:rgba(190,235,240,.12);color:#789099}
+.footer a{color:#74dce6}
+.loading-line{background:#0d1d25;border-color:rgba(190,235,240,.14);color:#dff7f8}
+.loading-line span{background:#1eb6c8}
+.error-note{background:#241b1a;border-color:rgba(217,154,107,.35)}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
