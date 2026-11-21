@@ -162,3 +162,17 @@ html, body {
     overflow: hidden;
   }
 }
+
+
+/* Cinejoy Navbar port — floating glass navigation */
+.cinejoy-header{height:88px;position:fixed;z-index:45;top:0;left:0;right:0;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.cinejoy-brand{pointer-events:auto;display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;font-weight:750;letter-spacing:-.8px;font-size:19px}
+.cinejoy-brand-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:#f2edf8;color:#17111f;font-size:26px;line-height:1;box-shadow:0 5px 25px #0005}
+.cinejoy-brand-mark span{color:#9875c8}
+.cinejoy-nav{pointer-events:auto;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:#0e0e1061;border:1px solid #ffffff12;backdrop-filter:blur(20px);box-shadow:inset 0 1px #ffffff12,0 8px 30px #0000004d}
+.cinejoy-nav-pill{position:absolute;top:6px;bottom:6px;border-radius:999px;background:#f3eef9;z-index:0;transition:left .4s cubic-bezier(.34,1.56,.64,1),width .4s cubic-bezier(.34,1.56,.64,1),opacity .2s;pointer-events:none}
+.cinejoy-nav-item{height:39px;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 17px;border:0;border-radius:999px;background:transparent;color:#ffffffa6;font-size:11px;font-weight:650;white-space:nowrap;transition:color .2s}
+.cinejoy-nav-item:hover{color:#fff}.cinejoy-nav-item.active{color:#17111f}.cinejoy-mobile-search{display:none;pointer-events:auto;width:38px;height:38px;border:1px solid #ffffff18;border-radius:50%;background:#ffffff0c;place-items:center}
+.cinejoy-mobile-nav{display:none}
+@media(max-width:700px){.cinejoy-header{height:72px;padding:0 18px}.cinejoy-brand-word{display:none}.cinejoy-nav{display:none}.cinejoy-mobile-search{display:grid}.cinejoy-mobile-nav{position:fixed;display:flex;z-index:46;left:12px;right:12px;bottom:12px;justify-content:space-around;gap:2px;padding:8px 5px;border:1px solid #ffffff14;border-radius:22px;background:#100b18e8;backdrop-filter:blur(22px);box-shadow:0 10px 35px #0008}.cinejoy-mobile-nav button{min-width:0;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px 2px;border:0;border-radius:14px;background:none;color:#a99db4;font-size:9px}.cinejoy-mobile-nav button.active{background:#ffffff16;color:#fff}}
+@media(min-width:701px){.home-page,.collection-page{padding-top:88px}}
